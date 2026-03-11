@@ -64,7 +64,7 @@ export default function Experience() {
       {/* IIT Kharagpur */}
       <div className="border-t-subtle py-12 flex flex-col md:flex-row justify-between gap-8 group">
         <div className="w-full md:w-1/3 scrub-reveal">
-          <h2 className="text-3xl font-light mb-2">Neuroimaging ML</h2>
+          <h2 className="text-3xl font-light mb-2">Neuroimaging ML Intern</h2>
           <p className="text-label text-zinc-500">IIT KHARAGPUR · JUN 2025 — PRESENT</p>
         </div>
         <div className="w-full md:w-1/2 scrub-reveal">

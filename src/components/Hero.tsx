@@ -23,21 +23,21 @@ export default function Hero() {
       <div className="mb-8">
         <div className="text-label mb-4">
           <span className="reveal-mask">
-            <span className="reveal-text hero-text">MATHEMATICS & COMPUTING</span>
+            <span className="reveal-text hero-text text-zinc-400">CURRENTLY AT SATSURE + IIT KGP</span>
           </span>
           <br />
           <span className="reveal-mask">
-            <span className="reveal-text hero-text">MIT MANIPAL — 2027</span>
+            <span className="reveal-text hero-text mt-2">MATHEMATICS & COMPUTING, MIT MANIPAL</span>
           </span>
         </div>
       </div>
       <h1 className="title-huge uppercase">
         <span className="reveal-mask block">
-          <span className="reveal-text hero-text">SYSTEMS</span>
+          <span className="reveal-text hero-text">RESEARCH &</span>
         </span>
         <span className="reveal-mask block">
           <span className="reveal-text hero-text text-zinc-600">
-            ENGINEERING.
+            SYSTEMS.
           </span>
         </span>
       </h1>

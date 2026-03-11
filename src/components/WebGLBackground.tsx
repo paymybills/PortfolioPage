@@ -41,7 +41,10 @@ export default function WebGLBackground() {
     scene.add(rimLight);
 
     // The Manifold Geometry (High polygon plane)
-    const geometry = new THREE.PlaneGeometry(60, 60, 150, 150);
+    // Mobile devices use far fewer vertices to ensure 60FPS
+    const isMobile = window.innerWidth <= 768;
+    const segments = isMobile ? 50 : 150;
+    const geometry = new THREE.PlaneGeometry(60, 60, segments, segments);
     geometry.rotateX(-Math.PI / 2);
 
     // Dark Chrome Material
