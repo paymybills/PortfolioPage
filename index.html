@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniruddha Roy | Systems Engineering</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts: Inter for that ultra-clean, Swiss design feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;800&display=swap" rel="stylesheet">
+
+    <!-- Three.js, GSAP, Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg: #000000;
+            --text-main: #ffffff;
+            --text-muted: #666666;
+            --border: #222222;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* WebGL Background */
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Content Layer */
+        #content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* High-End Typography Classes */
+        .title-huge {
+            font-size: clamp(4rem, 10vw, 12rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+        }
+
+        .text-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .text-body {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-weight: 300;
+            line-height: 1.4;
+            color: #aaaaaa;
+        }
+
+        /* Masking for sleek text reveals */
+        .reveal-mask {
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .reveal-text {
+            display: inline-block;
+            transform: translateY(110%);
+        }
+
+        /* Layout utilities */
+        .section-padding {
+            padding: 15vh 5vw;
+        }
+
+        .border-t-subtle {
+            border-top: 1px solid var(--border);
+        }
+
+        /* Fixed Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+            mix-blend-mode: difference;
+        }
+
+        .project-card:hover .project-title {
+            color: #ffffff;
+            transform: translateX(10px);
+        }
+
+        .project-title {
+            transition: all 0.4s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- The Obsidian Fluid -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Minimalist Header -->
+    <nav>
+        <div class="text-label text-white tracking-[0.3em]">ANIRUDDHA ROY</div>
+        <div class="flex gap-6">
+            <a href="https://github.com/anni-kelp" target="_blank"
+                class="text-label text-white hover:opacity-50 transition-opacity">GITHUB</a>
+            <a href="https://linkedin.com/in/anni-kelp" target="_blank"
+                class="text-label text-white hover:opacity-50 transition-opacity">LINKEDIN</a>
+        </div>
+    </nav>
+
+    <!-- Scrollable Content -->
+    <div id="content-wrapper">
+
+        <!-- Hero Section -->
+        <section class="h-screen flex flex-col justify-end section-padding pb-[10vh]">
+            <div class="mb-8">
+                <div class="text-label mb-4">
+                    <span class="reveal-mask"><span class="reveal-text hero-text">MATHEMATICS &
+                            COMPUTING</span></span><br>
+                    <span class="reveal-mask"><span class="reveal-text hero-text">MIT MANIPAL — 2027</span></span>
+                </div>
+            </div>
+            <h1 class="title-huge uppercase">
+                <span class="reveal-mask block"><span class="reveal-text hero-text">SYSTEMS</span></span>
+                <span class="reveal-mask block"><span
+                        class="reveal-text hero-text text-zinc-600">ENGINEERING.</span></span>
+            </h1>
+        </section>
+
+        <!-- Intro/Philosophy -->
+        <section class="section-padding flex justify-end">
+            <div class="w-full md:w-1/2">
+                <div class="text-label mb-8 scrub-reveal">01 / OVERVIEW</div>
+                <p class="text-body scrub-reveal text-white">
+                    I engineer end-to-end ML systems and research-grade pipelines. From Earth observation architectures
+                    to neuroimaging state space models, my focus is absolute precision under distribution shift.
+                </p>
+                <div class="mt-12 flex flex-wrap gap-4 scrub-reveal">
+                    <span
+                        class="px-4 py-2 border border-[#333] rounded-full text-xs tracking-widest uppercase text-zinc-400 hover:border-white hover:text-white transition-colors cursor-default">C++
+                        / Python</span>
+                    <span
+                        class="px-4 py-2 border border-[#333] rounded-full text-xs tracking-widest uppercase text-zinc-400 hover:border-white hover:text-white transition-colors cursor-default">PyTorch</span>
+                    <span
+                        class="px-4 py-2 border border-[#333] rounded-full text-xs tracking-widest uppercase text-zinc-400 hover:border-white hover:text-white transition-colors cursor-default">High-Performance
+                        Arch</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Experience -->
+        <section class="section-padding">
+            <div class="text-label mb-16 scrub-reveal">02 / RESEARCH & EXPERIENCE</div>
+
+            <!-- SatSure -->
+            <div class="border-t-subtle py-12 flex flex-col md:flex-row justify-between gap-8 group">
+                <div class="w-full md:w-1/3 scrub-reveal">
+                    <h2 class="text-3xl font-light mb-2">Earth Observation</h2>
+                    <p class="text-label text-zinc-500">SATSURE · FEB 2026 — PRESENT</p>
+                </div>
+                <div class="w-full md:w-1/2 scrub-reveal">
+                    <p
+                        class="text-zinc-400 text-lg font-light leading-relaxed mb-4 group-hover:text-white transition-colors duration-500">
+                        Co-developing an India-centric Earth observation benchmark suite to systematically study
+                        geographic distribution shift in satellite imagery models.
+                    </p>
+                    <ul class="text-zinc-500 text-sm space-y-2 font-light">
+                        <li>— Designing highly scalable geospatial ML pipelines for multi-sensor ingestion.</li>
+                        <li>— Contributing to a geospatial foundation model tailored to Indian land-use patterns.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- IIT Kharagpur -->
+            <div class="border-t-subtle py-12 flex flex-col md:flex-row justify-between gap-8 group">
+                <div class="w-full md:w-1/3 scrub-reveal">
+                    <h2 class="text-3xl font-light mb-2">Neuroimaging ML</h2>
+                    <p class="text-label text-zinc-500">IIT KHARAGPUR · JUN 2025 — PRESENT</p>
+                </div>
+                <div class="w-full md:w-1/2 scrub-reveal">
+                    <p
+                        class="text-zinc-400 text-lg font-light leading-relaxed mb-4 group-hover:text-white transition-colors duration-500">
+                        Developing spatiotemporal sequence models for fMRI data using Mamba-style architectures,
+                        targeting clinically relevant prediction tasks.
+                    </p>
+                    <ul class="text-zinc-500 text-sm space-y-2 font-light">
+                        <li>— Built robust preprocessing pipelines to transform raw signals into structured connectivity
+                            graphs.</li>
+                        <li>— Open-sourced BrainGAT; benchmarking GNN baselines against state space models.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Outlier -->
+            <div class="border-t-subtle py-12 flex flex-col md:flex-row justify-between gap-8 group">
+                <div class="w-full md:w-1/3 scrub-reveal">
+                    <h2 class="text-3xl font-light mb-2">AI Systems Evaluator</h2>
+                    <p class="text-label text-zinc-500">OUTLIER · JAN 2025 — PRESENT</p>
+                </div>
+                <div class="w-full md:w-1/2 scrub-reveal">
+                    <p
+                        class="text-zinc-400 text-lg font-light leading-relaxed mb-4 group-hover:text-white transition-colors duration-500">
+                        Engineered rigorous test cases and edge-case scenarios to stress-test reasoning and identify
+                        failure modes in production AI systems.
+                    </p>
+                    <ul class="text-zinc-500 text-sm space-y-2 font-light">
+                        <li>— Collaborated with reinforcement learning teams on reward function design.</li>
+                        <li>— Delivered structured quality evaluations improving model consistency.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- The Turing Circle -->
+            <div class="border-t-subtle py-12 flex flex-col md:flex-row justify-between gap-8 group">
+                <div class="w-full md:w-1/3 scrub-reveal">
+                    <h2 class="text-3xl font-light mb-2">Head of ML</h2>
+                    <p class="text-label text-zinc-500">THE TURING CIRCLE · DEC 2024 — PRESENT</p>
+                </div>
+                <div class="w-full md:w-1/2 scrub-reveal">
+                    <p
+                        class="text-zinc-400 text-lg font-light leading-relaxed mb-4 group-hover:text-white transition-colors duration-500">
+                        Leading a team of 10+ student researchers across applied ML projects, driving project scoping,
+                        architecture decisions, and code review processes.
+                    </p>
+                    <ul class="text-zinc-500 text-sm space-y-2 font-light">
+                        <li>— Established best practices for experimentation and ablation studies.</li>
+                        <li>— Mentored junior members in software engineering and ML fundamentals.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t-subtle"></div>
+        </section>
+
+        <!-- Engineered Systems (Projects) -->
+        <section class="section-padding bg-[#050505]">
+            <div class="text-label mb-16 scrub-reveal">03 / ARCHITECTURE & SYSTEMS</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
+
+                <!-- Stratify -->
+                <div class="scrub-reveal project-card">
+                    <div
+                        class="aspect-[4/3] bg-[#0a0a0a] border border-[#1a1a1a] mb-8 relative flex items-center justify-center overflow-hidden group">
+                        <div
+                            class="w-1/2 h-px bg-zinc-800 group-hover:w-full group-hover:bg-zinc-500 transition-all duration-1000 ease-in-out">
+                        </div>
+                        <div
+                            class="absolute w-px h-1/2 bg-zinc-800 group-hover:h-full group-hover:bg-zinc-500 transition-all duration-1000 ease-in-out">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-light mb-3 project-title text-zinc-300">Stratify Engine</h3>
+                            <p class="text-zinc-500 font-light text-sm mb-4 max-w-md">High-performance semantic document
+                                retrieval engine. Ingests PDFs, extracts layout, and builds a FAISS-based dense vector
+                                index. Reduced query latency by 40% via modular 3-tier architecture.</p>
+                        </div>
+                        <a href="https://github.com/paymybills/Stratify-" target="_blank"
+                            class="p-3 border border-zinc-800 rounded-full hover:bg-white hover:text-black transition-colors">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AIL -->
+                <div class="scrub-reveal project-card">
+                    <div
+                        class="aspect-[4/3] bg-[#0a0a0a] border border-[#1a1a1a] mb-8 relative flex items-center justify-center overflow-hidden group">
+                        <!-- Abstract Visual representation of nodes -->
+                        <div
+                            class="absolute w-12 h-12 border border-zinc-700 rounded-full group-hover:scale-[3] transition-all duration-1000 ease-out opacity-50">
+                        </div>
+                        <div
+                            class="absolute w-24 h-24 border border-zinc-800 rounded-full group-hover:scale-[2] transition-all duration-700 ease-out opacity-30">
+                        </div>
+                        <div
+                            class="absolute w-2 h-2 bg-zinc-600 rounded-full group-hover:bg-white transition-colors duration-500">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-light mb-3 project-title text-zinc-300">AIL Framework</h3>
+                            <p class="text-zinc-500 font-light text-sm mb-4 max-w-md">5-layer intelligence pipeline
+                                integrating co-change coupling analysis and commit blast radius. Computes transitive
+                                architectural impact, technical debt risk mapping, and dynamic Gemini selection.</p>
+                        </div>
+                        <a href="https://github.com/RajRudra06/AIL" target="_blank"
+                            class="p-3 border border-zinc-800 rounded-full hover:bg-white hover:text-black transition-colors">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Backtester + RL -->
+                <div class="scrub-reveal project-card">
+                    <div
+                        class="aspect-[4/3] bg-[#0a0a0a] border border-[#1a1a1a] mb-8 relative flex flex-col items-center justify-center overflow-hidden group gap-2">
+                        <div class="w-1/3 h-px bg-zinc-700 group-hover:w-2/3 transition-all duration-700"></div>
+                        <div class="w-1/2 h-px bg-zinc-600 group-hover:w-1/3 transition-all duration-500"></div>
+                        <div class="w-2/3 h-px bg-zinc-800 group-hover:w-1/2 transition-all duration-1000"></div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-light mb-3 project-title text-zinc-300">Vectorized Backtester & RL
+                            </h3>
+                            <p class="text-zinc-500 font-light text-sm mb-4 max-w-md">Modular Python framework
+                                evaluating financial strategies at scale (1,000+ iters/min). Integrated a PPO-based RL
+                                agent with cascaded LSTMs for temporal feature extraction in volatile markets.</p>
+                        </div>
+                        <a href="https://github.com/paymybills/Backtester" target="_blank"
+                            class="p-3 border border-zinc-800 rounded-full hover:bg-white hover:text-black transition-colors">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Deep Audio Denoising -->
+                <div class="scrub-reveal project-card">
+                    <div
+                        class="aspect-[4/3] bg-[#0a0a0a] border border-[#1a1a1a] mb-8 relative flex items-center justify-center overflow-hidden group gap-1">
+                        <div class="w-1 h-4 bg-zinc-800 group-hover:h-16 transition-all duration-300"></div>
+                        <div class="w-1 h-12 bg-zinc-700 group-hover:h-8 transition-all duration-500"></div>
+                        <div class="w-1 h-24 bg-zinc-600 group-hover:h-20 transition-all duration-200"></div>
+                        <div class="w-1 h-8 bg-zinc-700 group-hover:h-24 transition-all duration-700"></div>
+                        <div class="w-1 h-16 bg-zinc-800 group-hover:h-6 transition-all duration-400"></div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-light mb-3 project-title text-zinc-300">Deep Audio Denoising (ANC)
+                            </h3>
+                            <p class="text-zinc-500 font-light text-sm mb-4 max-w-md">Real-time ANC system using FxLMS
+                                adaptive filtering. Built a deep audio denoising pipeline using a DCCRN in the complex
+                                STFT domain, achieving 12dB SNR improvement.</p>
+                        </div>
+                        <a href="https://github.com/paymybills/ANC" target="_blank"
+                            class="p-3 border border-zinc-800 rounded-full hover:bg-white hover:text-black transition-colors">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PhotoOrbit -->
+                <div class="scrub-reveal project-card">
+                    <div
+                        class="aspect-[4/3] bg-[#0a0a0a] border border-[#1a1a1a] mb-8 relative flex items-center justify-center overflow-hidden group">
+                        <div
+                            class="w-20 h-20 border border-zinc-700 rotate-45 group-hover:rotate-90 group-hover:border-zinc-500 transition-all duration-1000 absolute">
+                        </div>
+                        <div
+                            class="w-12 h-12 border border-zinc-600 rotate-12 group-hover:-rotate-45 transition-all duration-700 absolute">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-light mb-3 project-title text-zinc-300">PhotoOrbit 3D</h3>
+                            <p class="text-zinc-500 font-light text-sm mb-4 max-w-md">MiDaS-based monocular depth
+                                estimation pipeline generating mesh-based 3D photospheres from single images.
+                                Implemented real-time parallax rendering via OpenGL/Open3D.</p>
+                        </div>
+                        <div class="p-3 border border-zinc-900 rounded-full opacity-50 cursor-not-allowed">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Physics Engine -->
+                <div class="scrub-reveal project-card">
+                    <div
+                        class="aspect-[4/3] bg-[#0a0a0a] border border-[#1a1a1a] mb-8 relative flex items-center justify-center overflow-hidden group">
+                        <div
+                            class="w-2 h-2 rounded-full bg-zinc-500 absolute group-hover:-translate-y-8 group-hover:translate-x-8 transition-transform duration-700">
+                        </div>
+                        <div
+                            class="w-1 h-1 rounded-full bg-zinc-600 absolute group-hover:translate-y-6 group-hover:-translate-x-12 transition-transform duration-1000">
+                        </div>
+                        <div
+                            class="w-3 h-3 border border-zinc-700 rounded-full absolute group-hover:-translate-y-12 group-hover:-translate-x-6 transition-transform duration-500">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-light mb-3 project-title text-zinc-300">Physics 3D Particle Engine
+                            </h3>
+                            <p class="text-zinc-500 font-light text-sm mb-4 max-w-md">Browser-based physics engine
+                                powering interactive graphing. Maintained 60 FPS on mobile with 5,000+ dynamically
+                                interacting nodes by optimizing WebGL buffers.</p>
+                        </div>
+                        <a href="https://github.com/paymybills/TTC-" target="_blank"
+                            class="p-3 border border-zinc-800 rounded-full hover:bg-white hover:text-black transition-colors">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Time-Series Forecasting -->
+                <div class="scrub-reveal project-card">
+                    <div
+                        class="aspect-[4/3] bg-[#0a0a0a] border border-[#1a1a1a] mb-8 relative flex items-end justify-center overflow-hidden group gap-2 pb-16">
+                        <div class="w-2 h-4 bg-zinc-800 group-hover:h-8 transition-all duration-300"></div>
+                        <div class="w-2 h-8 bg-zinc-700 group-hover:h-12 transition-all duration-500"></div>
+                        <div class="w-2 h-6 bg-zinc-600 group-hover:h-20 transition-all duration-400"></div>
+                        <div class="w-2 h-16 bg-zinc-500 group-hover:h-10 transition-all duration-700"></div>
+                        <div class="w-2 h-12 bg-zinc-700 group-hover:h-24 transition-all duration-200"></div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-light mb-3 project-title text-zinc-300">Time-Series Forecasting
+                            </h3>
+                            <p class="text-zinc-500 font-light text-sm mb-4 max-w-md">ARIMA and seasonal ARIMA models on
+                                banking data. Full workflow: stationarity checks, model selection via AIC/BIC, and
+                                multi-step evaluation strategies.</p>
+                        </div>
+                        <a href="https://github.com/paymybills/Time-Series-" target="_blank"
+                            class="p-3 border border-zinc-800 rounded-full hover:bg-white hover:text-black transition-colors">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SkyePlay -->
+                <div class="scrub-reveal project-card">
+                    <div
+                        class="aspect-[4/3] bg-[#0a0a0a] border border-[#1a1a1a] mb-8 relative flex items-center justify-center overflow-hidden group">
+                        <div
+                            class="w-16 h-10 border border-zinc-700 rounded-md flex items-center justify-center group-hover:border-zinc-500 transition-colors">
+                            <div
+                                class="w-0 h-0 border-t-4 border-b-4 border-l-6 border-transparent border-l-zinc-600 group-hover:border-l-zinc-400 transition-colors ml-1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-light mb-3 project-title text-zinc-300">SkyePlay Media Utility</h3>
+                            <p class="text-zinc-500 font-light text-sm mb-4 max-w-md">Flutter-based cross-platform
+                                application integrating REST APIs and JSON handling. Applied strict modular widget
+                                design and state management patterns.</p>
+                        </div>
+                        <a href="https://github.com/paymybills/SkyePlay" target="_blank"
+                            class="p-3 border border-zinc-800 rounded-full hover:bg-white hover:text-black transition-colors">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Capabilities & Certifications -->
+        <section class="section-padding border-t-subtle">
+            <div class="text-label mb-16 scrub-reveal">04 / CAPABILITIES & CREDENTIALS</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="scrub-reveal">
+                    <h4 class="text-white font-medium mb-6 uppercase tracking-widest text-sm">Languages</h4>
+                    <ul class="text-zinc-500 font-light space-y-3 text-sm">
+                        <li>Python</li>
+                        <li>C++</li>
+                        <li>R / SQL</li>
+                        <li>Bash</li>
+                        <li>TypeScript</li>
+                    </ul>
+                </div>
+
+                <div class="scrub-reveal">
+                    <h4 class="text-white font-medium mb-6 uppercase tracking-widest text-sm">ML & Data</h4>
+                    <ul class="text-zinc-500 font-light space-y-3 text-sm">
+                        <li>PyTorch / Lightning</li>
+                        <li>PyTorch Geometric</li>
+                        <li>TensorFlow</li>
+                        <li>Scikit-learn</li>
+                        <li>NumPy / Pandas</li>
+                    </ul>
+                </div>
+
+                <div class="scrub-reveal">
+                    <h4 class="text-white font-medium mb-6 uppercase tracking-widest text-sm">Domains</h4>
+                    <ul class="text-zinc-500 font-light space-y-3 text-sm">
+                        <li>Earth Observation</li>
+                        <li>Neuroimaging</li>
+                        <li>ML Systems</li>
+                        <li>Signal Processing</li>
+                        <li>Reinforcement Learning</li>
+                    </ul>
+                </div>
+
+                <div class="scrub-reveal">
+                    <h4 class="text-white font-medium mb-6 uppercase tracking-widest text-sm">Certifications</h4>
+                    <ul class="text-zinc-500 font-light space-y-4 text-sm">
+                        <li>
+                            <span class="block text-zinc-300">Deep Learning Specialization</span>
+                            <span class="block text-xs mt-1">DeepLearning.AI, Coursera</span>
+                        </li>
+                        <li>
+                            <span class="block text-zinc-300">Advanced Neurobiology I</span>
+                            <span class="block text-xs mt-1">Peking University, Coursera</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="section-padding h-screen flex flex-col justify-between items-center text-center">
+            <div class="flex-1 flex flex-col justify-center items-center w-full">
+                <div class="text-label mb-8 scrub-reveal">INITIATE CONTACT</div>
+                <a href="mailto:anni.kelp@gmail.com"
+                    class="title-huge hover:text-zinc-500 transition-colors duration-500 scrub-reveal">
+                    CONNECT.
+                </a>
+            </div>
+            <div class="w-full flex justify-between border-t-subtle pt-8 text-label scrub-reveal">
+                <div>BASED IN INDIA</div>
+                <div>© 2026 ANIRUDDHA ROY</div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // --- 1. SMOOTH SCROLLING (Lenis) ---
+        const lenis = new Lenis({
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --- 2. GSAP TYPOGRAPHY ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Reveal on Load
+        window.addEventListener("load", () => {
+            gsap.to(".hero-text", {
+                y: "0%",
+                duration: 1.5,
+                stagger: 0.1,
+                ease: "power4.out",
+                delay: 0.2
+            });
+        });
+
+        // Scrub Reveals for all other elements
+        const scrubElements = document.querySelectorAll('.scrub-reveal');
+        scrubElements.forEach(el => {
+            gsap.fromTo(el,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // --- 3. THREE.JS LIQUID OBSIDIAN MANIFOLD ---
+        const canvas = document.querySelector('#webgl-canvas');
+        const scene = new THREE.Scene();
+        // Pitch black fog for depth fading
+        scene.fog = new THREE.Fog(0x000000, 10, 50);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 5, 20);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000);
+
+        // Lights: High contrast for "Jaguar" luxury look
+        const keyLight = new THREE.DirectionalLight(0xffffff, 2);
+        keyLight.position.set(5, 10, 5);
+        scene.add(keyLight);
+
+        const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        rimLight.position.set(-5, 5, -5);
+        scene.add(rimLight);
+
+        // The Manifold Geometry (High polygon plane)
+        const geometry = new THREE.PlaneGeometry(60, 60, 150, 150);
+        geometry.rotateX(-Math.PI / 2);
+
+        // Dark Chrome Material
+        const material = new THREE.MeshStandardMaterial({
+            color: 0x111111,
+            metalness: 0.9,
+            roughness: 0.2,
+            wireframe: false
+        });
+
+        const plane = new THREE.Mesh(geometry, material);
+        plane.position.y = -2;
+        scene.add(plane);
+
+        // Store original vertices for math operations
+        const positionAttribute = geometry.attributes.position;
+        const vertex = new THREE.Vector3();
+        const originalPositions = [];
+        for (let i = 0; i < positionAttribute.count; i++) {
+            vertex.fromBufferAttribute(positionAttribute, i);
+            originalPositions.push(vertex.clone());
+        }
+
+        // Animation Loop Variables
+        const clock = new THREE.Clock();
+
+        let scrollY = 0;
+        lenis.on('scroll', (e) => {
+            scrollY = e.scroll;
+        });
+
+        function animateWebGL() {
+            requestAnimationFrame(animateWebGL);
+            const time = clock.getElapsedTime() * 0.3;
+
+            // Mathematical deformation of the plane
+            for (let i = 0; i < positionAttribute.count; i++) {
+                const orig = originalPositions[i];
+
+                const zOffset =
+                    Math.sin(orig.x * 0.2 + time) * 1.5 +
+                    Math.cos(orig.z * 0.2 + time * 0.8) * 1.5 +
+                    Math.sin((orig.x + orig.z) * 0.1 - time) * 1.0;
+
+                positionAttribute.setY(i, orig.y + zOffset);
+            }
+            positionAttribute.needsUpdate = true;
+            geometry.computeVertexNormals();
+
+            // Parallax camera movement
+            camera.position.y = 5 - (scrollY * 0.002);
+            camera.position.z = 20 - (scrollY * 0.001);
+            camera.lookAt(0, 0, 0);
+
+            keyLight.position.x = Math.sin(time * 0.5) * 10;
+            keyLight.position.z = Math.cos(time * 0.5) * 10;
+
+            renderer.render(scene, camera);
+        }
+
+        animateWebGL();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+
+</html>
