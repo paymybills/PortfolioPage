@@ -195,7 +195,7 @@ export default function Projects() {
               </p>
             </div>
             <a
-              href="https://github.com/paymybills/TTC-"
+              href="https://ttcprojects.vercel.app/"
               target="_blank"
               className="p-3 border border-zinc-800 rounded-full hover:bg-white hover:text-black transition-colors"
             >
