@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #000000;
+  --text-main: #ffffff;
+  --text-muted: #666666;
+  --border: #222222;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text-main);
+  /* The Inter font is loaded via next/font in layout.tsx */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* High-End Typography Classes */
+.title-huge {
+  font-size: clamp(4rem, 10vw, 12rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.text-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.text-body {
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 300;
+  line-height: 1.4;
+  color: #aaaaaa;
+}
+
+/* Masking for sleek text reveals */
+.reveal-mask {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.reveal-text {
+  display: inline-block;
+  transform: translateY(110%);
+}
+
+/* Layout utilities */
+.section-padding {
+  padding: 15vh 5vw;
+}
+
+.border-t-subtle {
+  border-top: 1px solid var(--border);
+}
+
+.project-card:hover .project-title {
+  color: #ffffff;
+  transform: translateX(10px);
+}
+
+.project-title {
+  transition: all 0.4s ease;
+}
