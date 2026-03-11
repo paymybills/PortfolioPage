@@ -28,8 +28,10 @@ export default function WebGLBackground() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000);
 
+    const currentMount = mountRef.current;
+    
     // Append canvas to component
-    mountRef.current.appendChild(renderer.domElement);
+    currentMount.appendChild(renderer.domElement);
 
     // Lights: High contrast for "Jaguar" luxury look
     const keyLight = new THREE.DirectionalLight(0xffffff, 2);
@@ -41,9 +43,10 @@ export default function WebGLBackground() {
     scene.add(rimLight);
 
     // The Manifold Geometry (High polygon plane)
-    // Mobile devices use far fewer vertices to ensure 60FPS
-    const isMobile = window.innerWidth <= 768;
-    const segments = isMobile ? 50 : 150;
+    // 90 segments on mobile ensures high enough density for the specular
+    // highlights to be caught by the camera, but cuts the geometry size by ~65%
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const segments = isMobile ? 90 : 150;
     const geometry = new THREE.PlaneGeometry(60, 60, segments, segments);
     geometry.rotateX(-Math.PI / 2);
 
@@ -123,8 +126,8 @@ export default function WebGLBackground() {
         window.removeEventListener("scroll", handleScroll);
         window.removeEventListener("resize", handleResize);
         cancelAnimationFrame(animationId);
-        if (mountRef.current) {
-            mountRef.current.removeChild(renderer.domElement);
+        if (currentMount) {
+            currentMount.removeChild(renderer.domElement);
          }
         geometry.dispose();
         material.dispose();
