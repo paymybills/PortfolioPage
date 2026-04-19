@@ -2,6 +2,70 @@
 
 import { useEffect, useRef } from "react";
 
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  color: string;
+}
+
+const createParticle = (w: number, h: number): Particle => {
+  const colors = ["#a855f7", "#fb923c", "#0ea5e9", "#e2e8f0"];
+  return {
+    x: Math.random() * w,
+    y: Math.random() * h,
+    vx: (Math.random() - 0.5) * 2,
+    vy: (Math.random() - 0.5) * 2,
+    radius: Math.random() * 2 + 1,
+    color: colors[Math.floor(Math.random() * colors.length)],
+  };
+};
+
+const updateParticle = (
+  p: Particle,
+  w: number,
+  h: number,
+  mouse: { x: number; y: number; isDown: boolean }
+) => {
+  p.x += p.vx;
+  p.y += p.vy;
+
+  if (p.x < 0 || p.x > w) p.vx *= -1;
+  if (p.y < 0 || p.y > h) p.vy *= -1;
+
+  const dx = mouse.x - p.x;
+  const dy = mouse.y - p.y;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+
+  const repelRadius = mouse.isDown ? 250 : 120;
+
+  if (dist < repelRadius) {
+    const forceDirectionX = dx / dist;
+    const forceDirectionY = dy / dist;
+    const force = (repelRadius - dist) / repelRadius;
+    const pushForce = mouse.isDown ? force * 15 : force * 5;
+
+    p.vx -= forceDirectionX * pushForce;
+    p.vy -= forceDirectionY * pushForce;
+  }
+
+  p.vx *= 0.95;
+  p.vy *= 0.95;
+
+  if (Math.abs(p.vx) < 0.2) p.vx += (Math.random() - 0.5) * 0.5;
+  if (Math.abs(p.vy) < 0.2) p.vy += (Math.random() - 0.5) * 0.5;
+};
+
+const drawParticle = (p: Particle, ctx: CanvasRenderingContext2D) => {
+  ctx.beginPath();
+  ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+  ctx.fillStyle = p.color;
+  ctx.fill();
+  ctx.closePath();
+};
+
 export default function ParticlePlayground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -13,86 +77,23 @@ export default function ParticlePlayground() {
 
     let w = 0;
     let h = 0;
-    let mouse = { x: -1000, y: -1000, isDown: false };
+    const mouse = { x: -1000, y: -1000, isDown: false };
     let animationFrameId: number;
-
-    class Particle {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      radius: number;
-      color: string;
-      baseX: number;
-      baseY: number;
-
-      constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-        this.baseX = x;
-        this.baseY = y;
-        this.vx = (Math.random() - 0.5) * 2;
-        this.vy = (Math.random() - 0.5) * 2;
-        this.radius = Math.random() * 2 + 1;
-        const colors = ["#a855f7", "#fb923c", "#0ea5e9", "#e2e8f0"];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > w) this.vx *= -1;
-        if (this.y < 0 || this.y > h) this.vy *= -1;
-
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        
-        const repelRadius = mouse.isDown ? 250 : 120;
-        
-        if (dist < repelRadius) {
-          const forceDirectionX = dx / dist;
-          const forceDirectionY = dy / dist;
-          const force = (repelRadius - dist) / repelRadius;
-          const pushForce = mouse.isDown ? force * 15 : force * 5;
-          
-          this.vx -= forceDirectionX * pushForce;
-          this.vy -= forceDirectionY * pushForce;
-        }
-
-        this.vx *= 0.95;
-        this.vy *= 0.95;
-
-        if (Math.abs(this.vx) < 0.2) this.vx += (Math.random() - 0.5) * 0.5;
-        if (Math.abs(this.vy) < 0.2) this.vy += (Math.random() - 0.5) * 0.5;
-      }
-
-      draw() {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
-      }
-    }
-
     let particles: Particle[] = [];
 
     const init = () => {
       w = canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
-      h = canvas.height = 400; 
+      h = canvas.height = 400;
       particles = [];
-      const particleCount = Math.floor((w * h) / 6000); 
+      const particleCount = Math.floor((w * h) / 6000);
       for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle(Math.random() * w, Math.random() * h));
+        particles.push(createParticle(w, h));
       }
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, w, h);
-      
+
       for (let i = 0; i < particles.length; i++) {
         for (let j = i; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -110,20 +111,22 @@ export default function ParticlePlayground() {
             ctx.closePath();
           }
         }
-        particles[i].update();
-        particles[i].draw();
+        updateParticle(particles[i], w, h, mouse);
+        drawParticle(particles[i], ctx);
       }
       animationFrameId = requestAnimationFrame(animate);
     };
 
     window.addEventListener("resize", init);
+    
     const setMouse = (e: MouseEvent | TouchEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+      const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+      const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
       mouse.x = clientX - rect.left;
       mouse.y = clientY - rect.top;
     };
+    
     canvas.addEventListener("mousemove", setMouse as EventListener);
     canvas.addEventListener("touchmove", setMouse as EventListener, { passive: true });
     canvas.addEventListener("mousedown", () => (mouse.isDown = true));
@@ -149,11 +152,13 @@ export default function ParticlePlayground() {
 
   return (
     <section className="section-padding">
-      <div className="text-label mb-8 scrub-reveal font-medium">05 / A WILD GOOSE CHASE FOR YOU</div>
+      <div className="text-label mb-8 scrub-reveal font-medium">
+        05 / A WILD GOOSE CHASE FOR YOU
+      </div>
       <div className="relative w-full h-[400px] border border-[var(--border)] rounded-[24px] overflow-hidden glass-strong group cursor-crosshair">
-        <canvas ref={canvasRef} className="absolute inset-0 block"></canvas>
+        <canvas ref={canvasRef} className="absolute inset-0 block w-full h-full"></canvas>
         <div className="absolute bottom-6 right-6 text-[10px] text-[var(--accent)] font-medium tracking-widest uppercase pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity">
-          Hover To Interact &mdash; Click & Drag to Repel
+          Touch To Interact &mdash; Tap & Drag to Repel
         </div>
       </div>
     </section>
