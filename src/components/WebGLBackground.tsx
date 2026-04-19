@@ -90,10 +90,10 @@ export default function WebGLBackground() {
     scene.add(ambientLight);
 
     // === Flowing ribbon geometry ===
-    // Reduced resolution slightly to guarantee buttery smooth 60fps on normals recomputation
+    // Increased resolution for a smoother, ultra-premium liquid effect
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const segX = isMobile ? 80 : 120;
-    const segY = isMobile ? 20 : 30;
+    const segX = isMobile ? 150 : 250;
+    const segY = isMobile ? 40 : 60;
     const ribbonWidth = 60;
     const ribbonDepth = 15;
 

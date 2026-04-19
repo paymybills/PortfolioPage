@@ -28,7 +28,7 @@ export default function Hero() {
         <div className="text-label mb-4">
           <span className="reveal-mask">
             <span className="reveal-text hero-text text-zinc-400">
-              CURRENTLY AT SATSURE + IIT KGP
+              CURRENTLY AT AMAZON + SATSURE
             </span>
           </span>
           <br />
