@@ -36,13 +36,13 @@ export default function Experience() {
   const borderGlowProps = {
     edgeSensitivity: 30,
     backgroundColor: "rgba(255, 255, 255, 0.4)",
-    glowColor: "270 80 50",
+    glowColor: "25 90 60", // Orange-ish hue
     borderRadius: 24,
     glowRadius: 30,
     glowIntensity: 0.6,
     coneSpread: 25,
     animated: false,
-    colors: ['#9b7ae8', '#c4a8ff', '#6c3cdc'], // Match theme
+    colors: ['#f97316', '#38bdf8', '#ea580c'], // Light blue and orange theme
     fillOpacity: 0.35,
   };
 

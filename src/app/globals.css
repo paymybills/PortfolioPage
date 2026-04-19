@@ -6,11 +6,14 @@
   --text-main: #0f172a;
   --text-muted: #64748b;
   --border: rgba(0, 0, 0, 0.08);
-  --accent: #9b7ae8;
-  --accent-light: #c4a8ff;
-  --accent-deep: #6c3cdc;
-  --accent-glow: rgba(155, 122, 232, 0.25);
-  --accent-glow-strong: rgba(155, 122, 232, 0.45);
+  
+  /* Orange and Light Blue Accent Palette */
+  --accent: #f97316; /* Orange */
+  --accent-light: #38bdf8; /* Light Blue */
+  --accent-deep: #ea580c; /* Deep Orange */
+  
+  --accent-glow: rgba(249, 115, 22, 0.15);
+  --accent-glow-strong: rgba(56, 189, 248, 0.35);
 }
 
 body,
@@ -52,7 +55,7 @@ html {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  color: var(--accent-deep);
+  color: var(--accent-light);
   font-weight: 600;
 }
 
@@ -112,7 +115,7 @@ html {
 
 /* ─── Project Cards ─── */
 .project-card:hover .project-title {
-  color: var(--accent-deep);
+  color: var(--accent);
   transform: translateX(8px);
 }
 
@@ -141,7 +144,7 @@ html {
   color: #fff;
 }
 .pill-btn-primary:hover {
-  background: var(--accent-deep);
+  background: var(--accent);
   box-shadow: 0 0 24px var(--accent-glow);
 }
 
@@ -152,7 +155,7 @@ html {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .pill-btn-outline:hover {
-  border-color: var(--text-main);
+  border-color: var(--accent-light);
   background: rgba(255,255,255,0.9);
   box-shadow: 0 0 16px rgba(0,0,0,0.05);
 }
@@ -160,5 +163,5 @@ html {
 /* ─── Smooth selection ─── */
 ::selection {
   background: var(--accent-light);
-  color: #000;
+  color: #fff;
 }
