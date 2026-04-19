@@ -33,61 +33,105 @@ export default function Skills() {
   }, []);
 
   return (
-    <section ref={containerRef} className="section-padding border-t-subtle">
-      <div className="text-label mb-16 scrub-reveal">04 / CAPABILITIES & CREDENTIALS</div>
+    <section
+      ref={containerRef}
+      id="skills"
+      className="section-padding border-t-subtle"
+    >
+      <div className="text-label mb-16 scrub-reveal">
+        04 / CAPABILITIES & CREDENTIALS
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="scrub-reveal">
-          <h4 className="text-white font-medium mb-6 uppercase tracking-widest text-sm">
+          <h4 className="text-[var(--accent-light)] font-medium mb-6 uppercase tracking-widest text-sm">
             Languages
           </h4>
           <ul className="text-zinc-500 font-light space-y-3 text-sm">
-            <li>Python</li>
-            <li>C++</li>
-            <li>R / SQL</li>
-            <li>Bash</li>
-            <li>TypeScript</li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              Python
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              C++
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              R / SQL
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              Bash
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              TypeScript
+            </li>
           </ul>
         </div>
 
         <div className="scrub-reveal">
-          <h4 className="text-white font-medium mb-6 uppercase tracking-widest text-sm">
+          <h4 className="text-[var(--accent-light)] font-medium mb-6 uppercase tracking-widest text-sm">
             ML & Data
           </h4>
           <ul className="text-zinc-500 font-light space-y-3 text-sm">
-            <li>PyTorch / Lightning</li>
-            <li>PyTorch Geometric</li>
-            <li>TensorFlow</li>
-            <li>Scikit-learn</li>
-            <li>NumPy / Pandas</li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              PyTorch / Lightning
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              PyTorch Geometric
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              TensorFlow
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              Scikit-learn
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              NumPy / Pandas
+            </li>
           </ul>
         </div>
 
         <div className="scrub-reveal">
-          <h4 className="text-white font-medium mb-6 uppercase tracking-widest text-sm">
+          <h4 className="text-[var(--accent-light)] font-medium mb-6 uppercase tracking-widest text-sm">
             Domains
           </h4>
           <ul className="text-zinc-500 font-light space-y-3 text-sm">
-            <li>Earth Observation</li>
-            <li>Neuroimaging</li>
-            <li>ML Systems</li>
-            <li>Signal Processing</li>
-            <li>Reinforcement Learning</li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              Earth Observation
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              Neuroimaging
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              ML Systems
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              Signal Processing
+            </li>
+            <li className="hover:text-[var(--accent-light)] transition-colors duration-300 cursor-default">
+              Reinforcement Learning
+            </li>
           </ul>
         </div>
 
         <div className="scrub-reveal">
-          <h4 className="text-white font-medium mb-6 uppercase tracking-widest text-sm">
+          <h4 className="text-[var(--accent-light)] font-medium mb-6 uppercase tracking-widest text-sm">
             Certifications
           </h4>
           <ul className="text-zinc-500 font-light space-y-4 text-sm">
             <li>
-              <span className="block text-zinc-300">Deep Learning Specialization</span>
-              <span className="block text-xs mt-1">DeepLearning.AI, Coursera</span>
+              <span className="block text-zinc-300 hover:text-[var(--accent-light)] transition-colors duration-300">
+                Deep Learning Specialization
+              </span>
+              <span className="block text-xs mt-1">
+                DeepLearning.AI, Coursera
+              </span>
             </li>
             <li>
-              <span className="block text-zinc-300">Advanced Neurobiology I</span>
-              <span className="block text-xs mt-1">Peking University, Coursera</span>
+              <span className="block text-zinc-300 hover:text-[var(--accent-light)] transition-colors duration-300">
+                Advanced Neurobiology I
+              </span>
+              <span className="block text-xs mt-1">
+                Peking University, Coursera
+              </span>
             </li>
           </ul>
         </div>

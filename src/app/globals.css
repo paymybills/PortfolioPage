@@ -1,10 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #000000;
-  --text-main: #ffffff;
-  --text-muted: #666666;
-  --border: #222222;
+  --bg: #050505;
+  --bg-card: #0a0a0a;
+  --text-main: #f0f0f0;
+  --text-muted: #777777;
+  --border: #1a1a1a;
+  --accent: #9b7ae8;
+  --accent-light: #c4a8ff;
+  --accent-deep: #6c3cdc;
+  --accent-glow: rgba(155, 122, 232, 0.15);
+  --accent-glow-strong: rgba(155, 122, 232, 0.35);
 }
 
 body,
@@ -13,7 +19,6 @@ html {
   padding: 0;
   background-color: var(--bg);
   color: var(--text-main);
-  /* The Inter font is loaded via next/font in layout.tsx */
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,30 +29,41 @@ html {
   display: none;
 }
 
-/* High-End Typography Classes */
+/* ─── Typography ─── */
 .title-huge {
-  font-size: clamp(4rem, 10vw, 12rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
+  font-size: clamp(3.5rem, 9vw, 10rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-family: var(--font-display), serif;
+  font-style: italic;
+}
+
+.title-section {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 400;
+  font-family: var(--font-display), serif;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .text-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--text-muted);
+  letter-spacing: 0.25em;
+  color: var(--accent);
   font-weight: 500;
 }
 
 .text-body {
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
   font-weight: 300;
-  line-height: 1.4;
-  color: #aaaaaa;
+  line-height: 1.5;
+  color: #b0b0b0;
 }
 
-/* Masking for sleek text reveals */
+/* ─── Masking for text reveals ─── */
 .reveal-mask {
   overflow: hidden;
   display: inline-block;
@@ -59,20 +75,86 @@ html {
   transform: translateY(110%);
 }
 
-/* Layout utilities */
+/* ─── Layout ─── */
 .section-padding {
-  padding: 15vh 5vw;
+  padding: 12vh 5vw;
 }
 
 .border-t-subtle {
   border-top: 1px solid var(--border);
 }
 
+/* ─── Glassmorphism ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Accent Utilities ─── */
+.accent-glow {
+  box-shadow: 0 0 20px var(--accent-glow), 0 0 60px var(--accent-glow);
+}
+
+.accent-glow-text {
+  text-shadow: 0 0 40px var(--accent-glow-strong);
+}
+
+/* ─── Project Cards ─── */
 .project-card:hover .project-title {
-  color: #ffffff;
-  transform: translateX(10px);
+  color: var(--accent-light);
+  transform: translateX(8px);
 }
 
 .project-title {
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─── Pill Buttons ─── */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.6rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pill-btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.pill-btn-primary:hover {
+  background: var(--accent-deep);
+  box-shadow: 0 0 24px var(--accent-glow-strong);
+}
+
+.pill-btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.pill-btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent-light);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* ─── Smooth selection ─── */
+::selection {
+  background: var(--accent);
+  color: #fff;
 }

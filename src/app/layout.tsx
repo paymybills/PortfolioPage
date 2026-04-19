@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "800"],
+  weight: ["200", "300", "400", "500", "700"],
   variable: "--font-inter",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+});
+
 export const metadata: Metadata = {
-  title: "Aniruddha Roy | Systems Engineering",
-  description: "Portfolio of Aniruddha Roy",
+  title: "Aniruddha Roy | Research & Systems Engineering",
+  description:
+    "Portfolio of Aniruddha Roy — ML systems, neuroimaging, earth observation, and high-performance architectures.",
 };
 
 export default function RootLayout({
@@ -21,10 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased text-white bg-black`}>
-        <LenisProvider>
-          {children}
-        </LenisProvider>
+      <body
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased text-white`}
+        style={{ backgroundColor: "#050505" }}
+      >
+        <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
   );
