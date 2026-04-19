@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Box } from "lucide-react"; // Using an elegant icon to replace the text
 
 const NAV_LINKS = [
   { label: "Home", href: "#" },
@@ -23,37 +24,36 @@ export default function Navigation() {
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center w-full px-4">
       <nav
         className={`flex items-center justify-between w-full max-w-5xl px-3 py-2 rounded-full transition-all duration-500 shadow-xl ${
-          scrolled ? "bg-white/10 backdrop-blur-xl border border-white/20" : "bg-white/5 backdrop-blur-md border border-white/10"
+          scrolled 
+            ? "bg-white/70 backdrop-blur-xl border border-black/5" 
+            : "bg-white/40 backdrop-blur-md border border-white/50"
         }`}
       >
-        {/* Logo */}
+        {/* Logo / Icon */}
         <a
           href="#"
-          className="flex items-center gap-2 pl-3 pr-4 py-1.5 text-sm font-semibold tracking-wider text-white whitespace-nowrap"
+          className="flex items-center gap-2 pl-3 pr-4 py-1.5 transition-opacity hover:opacity-70"
         >
-          <div className="w-5 h-5 rounded-full border border-white/50 flex items-center justify-center">
-             <span className="text-[10px]">A</span>
-          </div>
-          A.R. Systems
+          <Box className="w-5 h-5 text-slate-800" strokeWidth={2} />
         </a>
 
         {/* Links */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2 font-sans">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="px-4 py-1.5 text-sm font-medium text-white/70 hover:text-white rounded-full hover:bg-white/10 transition-all duration-300 whitespace-nowrap"
+              className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-full hover:bg-black/5 transition-all duration-300 whitespace-nowrap"
             >
               {link.label}
             </a>
           ))}
         </div>
 
-        {/* CTA - Solid white to match the "Sign up" button from the screenshot */}
+        {/* CTA */}
         <a
           href="mailto:anni.kelp@gmail.com"
-          className="ml-2 px-5 py-2 text-sm font-semibold rounded-full bg-white text-slate-900 hover:bg-zinc-200 transition-all duration-300 shadow-md whitespace-nowrap"
+          className="ml-2 px-5 py-2 text-sm font-semibold rounded-full bg-slate-900 text-white hover:bg-slate-800 transition-all duration-300 shadow-md whitespace-nowrap font-sans tracking-wide"
         >
           Get in Touch
         </a>

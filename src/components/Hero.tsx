@@ -27,13 +27,13 @@ export default function Hero() {
       <div className="mb-8">
         <div className="text-label mb-4">
           <span className="reveal-mask">
-            <span className="reveal-text hero-text text-zinc-400">
+            <span className="reveal-text hero-text text-slate-500">
               CURRENTLY AT AMAZON + SATSURE
             </span>
           </span>
           <br />
           <span className="reveal-mask">
-            <span className="reveal-text hero-text mt-2">
+            <span className="reveal-text hero-text mt-2 text-slate-500">
               MATHEMATICS & COMPUTING, MIT MANIPAL
             </span>
           </span>
@@ -46,7 +46,7 @@ export default function Hero() {
           <span className="reveal-text hero-text">Research &</span>
         </span>
         <span className="reveal-mask block">
-          <span className="reveal-text hero-text text-[var(--accent-light)] accent-glow-text">
+          <span className="reveal-text hero-text text-[var(--accent)] accent-glow-text">
             Systems.
           </span>
         </span>
