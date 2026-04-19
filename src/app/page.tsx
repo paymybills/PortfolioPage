@@ -17,9 +17,9 @@ export default function Home() {
           cursorSize={100}
           isViscous={false}
           viscous={30}
-          iterationsViscous={32}
-          iterationsPoisson={32}
-          resolution={0.5}
+          iterationsViscous={8}
+          iterationsPoisson={8}
+          resolution={0.25}
           isBounce={false}
           autoDemo={true}
           autoSpeed={0.5}

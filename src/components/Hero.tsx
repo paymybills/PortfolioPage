@@ -42,6 +42,11 @@ export default function Hero() {
 
       {/* Main display heading — italic serif */}
       <h1 className="title-huge">
+        <span className="reveal-mask block mb-2">
+          <span className="reveal-text hero-text text-2xl md:text-4xl text-[var(--accent)] font-light">
+            Aniruddha Roy
+          </span>
+        </span>
         <span className="reveal-mask block">
           <span className="reveal-text hero-text">Research &</span>
         </span>
