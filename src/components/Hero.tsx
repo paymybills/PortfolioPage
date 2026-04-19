@@ -41,18 +41,22 @@ export default function Hero() {
       </div>
 
       {/* Main display heading — italic serif */}
-      <h1 className="title-huge">
-        <span className="reveal-mask block mb-2">
-          <span className="reveal-text hero-text text-2xl md:text-4xl text-[var(--accent)] font-light">
+      <div className="mb-4 scrub-reveal">
+        <span className="reveal-mask block">
+          <span className="reveal-text hero-text text-5xl md:text-7xl font-[family-name:var(--font-display)] text-[var(--accent)] font-light italic mb-2">
             Aniruddha Roy
           </span>
         </span>
-        <span className="reveal-mask block">
+      </div>
+
+      <h1 className="title-huge leading-tight">
+        <span className="reveal-mask block pb-4">
           <span className="reveal-text hero-text">Research &</span>
         </span>
-        <span className="reveal-mask block">
-          <span className="reveal-text hero-text text-[var(--accent)] accent-glow-text">
-            Systems.
+        <span className="reveal-mask block pb-6">
+          <span className="reveal-text hero-text text-[var(--text-main)] italic relative">
+            Infra.
+            <span className="absolute -inset-4 rounded-full bg-[var(--accent-glow)] blur-[60px] -z-10 mix-blend-screen opacity-70 block" />
           </span>
         </span>
       </h1>

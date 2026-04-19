@@ -48,7 +48,7 @@ export default function Experience() {
                 Software Dev Engineer Intern
               </h2>
               <p className="text-label text-[var(--accent)]">
-                AMAZON · UPCOMING SUMMER 2026
+                AMAZON · JULY — DEC 2026
               </p>
             </div>
             <div className="w-full md:w-1/2 scrub-reveal">
