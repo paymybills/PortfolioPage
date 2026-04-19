@@ -51,7 +51,7 @@ export default function Hero() {
 
       <h1 className="title-huge leading-tight">
         <span className="reveal-mask block pb-4">
-          <span className="reveal-text hero-text">Research &</span>
+          <span className="reveal-text hero-text">Research and</span>
         </span>
         <span className="reveal-mask block pb-6">
           <span className="reveal-text hero-text text-[var(--text-main)] italic relative">

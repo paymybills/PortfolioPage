@@ -117,15 +117,22 @@ export default function ParticlePlayground() {
     };
 
     window.addEventListener("resize", init);
-    const setMouse = (e: MouseEvent) => {
+    const setMouse = (e: MouseEvent | TouchEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+      mouse.x = clientX - rect.left;
+      mouse.y = clientY - rect.top;
     };
-    canvas.addEventListener("mousemove", setMouse);
+    canvas.addEventListener("mousemove", setMouse as EventListener);
+    canvas.addEventListener("touchmove", setMouse as EventListener, { passive: true });
     canvas.addEventListener("mousedown", () => (mouse.isDown = true));
+    canvas.addEventListener("touchstart", ((e: TouchEvent) => {
+      setMouse(e);
+      mouse.isDown = true;
+    }) as EventListener, { passive: true });
     canvas.addEventListener("mouseup", () => (mouse.isDown = false));
-    canvas.addEventListener("mouseleave", () => {
+    canvas.addEventListener("touchend", () => {
       mouse.x = -1000;
       mouse.y = -1000;
       mouse.isDown = false;
@@ -142,7 +149,7 @@ export default function ParticlePlayground() {
 
   return (
     <section className="section-padding">
-      <div className="text-label mb-8 scrub-reveal font-medium">05 / INTERACTIVE KINETICS</div>
+      <div className="text-label mb-8 scrub-reveal font-medium">05 / A WILD GOOSE CHASE FOR YOU</div>
       <div className="relative w-full h-[400px] border border-[var(--border)] rounded-[24px] overflow-hidden glass-strong group cursor-crosshair">
         <canvas ref={canvasRef} className="absolute inset-0 block"></canvas>
         <div className="absolute bottom-6 right-6 text-[10px] text-[var(--accent)] font-medium tracking-widest uppercase pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity">
