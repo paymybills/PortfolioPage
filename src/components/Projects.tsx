@@ -43,7 +43,7 @@ export default function Projects() {
     glowIntensity: 0.6,
     coneSpread: 25,
     animated: false,
-    colors: ['#f97316', '#38bdf8', '#ea580c'], // Light blue & orange palette
+    colors: ['#0ea5e9', '#fb923c', '#a855f7'], // Pool blue, orange, purple
     fillOpacity: 0.35,
   };
 

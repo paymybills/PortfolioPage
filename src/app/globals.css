@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f8fafc;
+  --bg: #e6f2f5; /* Soft Light Blue Pool */
   --bg-card: rgba(255, 255, 255, 0.65);
   --text-main: #0f172a;
   --text-muted: #64748b;
   --border: rgba(0, 0, 0, 0.08);
   
-  /* Orange and Light Blue Accent Palette */
-  --accent: #f97316; /* Orange */
-  --accent-light: #38bdf8; /* Light Blue */
-  --accent-deep: #ea580c; /* Deep Orange */
+  /* Orange and Purple Accent Palette */
+  --accent: #fb923c; /* Orange */
+  --accent-light: #a855f7; /* Purple */
+  --accent-deep: #0ea5e9; /* Deep Pool Blue */
   
   --accent-glow: rgba(249, 115, 22, 0.15);
-  --accent-glow-strong: rgba(56, 189, 248, 0.35);
+  --accent-glow-strong: rgba(168, 85, 247, 0.35);
 }
 
 body,

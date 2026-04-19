@@ -42,7 +42,7 @@ export default function Experience() {
     glowIntensity: 0.6,
     coneSpread: 25,
     animated: false,
-    colors: ['#f97316', '#38bdf8', '#ea580c'], // Light blue and orange theme
+    colors: ['#0ea5e9', '#fb923c', '#a855f7'], // Light blue pool theme with orange and purple
     fillOpacity: 0.35,
   };
 

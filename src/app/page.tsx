@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <div className="fixed inset-0 z-0 pointer-events-none">
         <LiquidEther
-          colors={['#f97316', '#38bdf8', '#fb923c']}
+          colors={['#0ea5e9', '#fb923c', '#a855f7']}
           mouseForce={20}
           cursorSize={100}
           isViscous={false}
