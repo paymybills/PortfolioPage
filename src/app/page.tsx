@@ -12,7 +12,7 @@ export default function Home() {
       {/* Iridescent Shader Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <Iridescence
-          color={[0.1, 0.05, 0.25]} // Deep violet / dark cyan to let white text pop
+          color={[0.5, 0.7, 1.0]} // Soft cyan-purple mix based on the ref
           mouseReact={false}
           amplitude={0.1}
           speed={1.0}
