@@ -26,76 +26,76 @@ export default function WebGLBackground() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x050505);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.4;
+    renderer.toneMappingExposure = 1.1;
 
     const currentMount = mountRef.current;
     currentMount.appendChild(renderer.domElement);
 
-    // === Cube environment map for polished metal reflections ===
+    // === Cube environment map for liquid mercury reflections ===
     const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256);
     const cubeCamera = new THREE.CubeCamera(0.1, 100, cubeRenderTarget);
-    // Fake environment: a few colored point lights to create reflection spots
+    
+    // Fake environment to give the mercury something to reflect
     const envScene = new THREE.Scene();
-    envScene.background = new THREE.Color(0x050505);
-    // Purple reflection spots
-    const spotGeo = new THREE.SphereGeometry(2, 16, 16);
-    const spot1Mat = new THREE.MeshBasicMaterial({ color: 0x9b7ae8 });
-    const spot1 = new THREE.Mesh(spotGeo, spot1Mat);
-    spot1.position.set(10, 8, -5);
+    envScene.background = new THREE.Color(0x020202); // Darker background to add contrast to silver
+
+    // Create a series of bright, colorful celestial spheres to reflect off the mercury
+    const spotGeo = new THREE.SphereGeometry(3, 32, 32);
+    
+    // Core purple lights
+    const spot1 = new THREE.Mesh(spotGeo, new THREE.MeshBasicMaterial({ color: 0x9b7ae8 }));
+    spot1.position.set(15, 10, -5);
     envScene.add(spot1);
-    const spot2Mat = new THREE.MeshBasicMaterial({ color: 0xc4a8ff });
-    const spot2 = new THREE.Mesh(spotGeo, spot2Mat);
-    spot2.position.set(-8, 4, 8);
+    
+    const spot2 = new THREE.Mesh(spotGeo, new THREE.MeshBasicMaterial({ color: 0xc4a8ff }));
+    spot2.position.set(-12, 8, 10);
     envScene.add(spot2);
-    const spot3Mat = new THREE.MeshBasicMaterial({ color: 0x6c3cdc });
-    const spot3 = new THREE.Mesh(spotGeo, spot3Mat);
-    spot3.position.set(0, -6, 12);
+    
+    const spot3 = new THREE.Mesh(spotGeo, new THREE.MeshBasicMaterial({ color: 0x6c3cdc }));
+    spot3.position.set(0, -10, 15);
     envScene.add(spot3);
-    const spot4Mat = new THREE.MeshBasicMaterial({ color: 0x2a1a4e });
-    const spot4 = new THREE.Mesh(spotGeo, spot4Mat);
-    spot4.position.set(-12, 10, -10);
-    envScene.add(spot4);
-    // White specular highlight spots for that chrome sheen
-    const specGeo = new THREE.SphereGeometry(1.5, 16, 16);
-    const spec1Mat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    const spec1 = new THREE.Mesh(specGeo, spec1Mat);
-    spec1.position.set(5, 12, 3);
+
+    // Bright white highlight lights for the mercury sheen
+    const specGeo = new THREE.SphereGeometry(2, 32, 32);
+    const spec1 = new THREE.Mesh(specGeo, new THREE.MeshBasicMaterial({ color: 0xffffff }));
+    spec1.position.set(8, 15, 5);
     envScene.add(spec1);
-    const spec2Mat = new THREE.MeshBasicMaterial({ color: 0xddddff });
-    const spec2 = new THREE.Mesh(specGeo, spec2Mat);
-    spec2.position.set(-6, 8, -8);
+    
+    const spec2 = new THREE.Mesh(specGeo, new THREE.MeshBasicMaterial({ color: 0xeeeeff }));
+    spec2.position.set(-10, 12, -10);
     envScene.add(spec2);
 
     cubeCamera.position.set(0, 0, 0);
     cubeCamera.update(renderer, envScene);
 
-    // === Lights — purple-tinted ===
-    const keyLight = new THREE.DirectionalLight(0xc4a8ff, 3.0);
+    // === Real scene lights ===
+    // Use intensely colored directional lights to bathe the silver mercury in purple
+    const keyLight = new THREE.DirectionalLight(0xc4a8ff, 4.0);
     keyLight.position.set(5, 10, 5);
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0x6c3cdc, 1.8);
+    const rimLight = new THREE.DirectionalLight(0x6c3cdc, 2.5);
     rimLight.position.set(-8, 5, -5);
     scene.add(rimLight);
 
-    const fillLight = new THREE.DirectionalLight(0x9b7ae8, 0.6);
+    const fillLight = new THREE.DirectionalLight(0xb490ff, 1.5);
     fillLight.position.set(0, -5, 10);
     scene.add(fillLight);
 
-    // White top light for chrome specular streaks
-    const topLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    const topLight = new THREE.DirectionalLight(0xffffff, 1.5);
     topLight.position.set(0, 15, 0);
     scene.add(topLight);
 
-    const ambientLight = new THREE.AmbientLight(0x1a0a2e, 0.2);
+    const ambientLight = new THREE.AmbientLight(0x2a1a4e, 0.5);
     scene.add(ambientLight);
 
     // === Flowing ribbon geometry ===
+    // Reduced resolution slightly to guarantee buttery smooth 60fps on normals recomputation
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const segX = isMobile ? 120 : 200;
-    const segY = isMobile ? 30 : 50;
-    const ribbonWidth = 50;
-    const ribbonDepth = 12;
+    const segX = isMobile ? 80 : 120;
+    const segY = isMobile ? 20 : 30;
+    const ribbonWidth = 60;
+    const ribbonDepth = 15;
 
     const geometry = new THREE.PlaneGeometry(
       ribbonWidth,
@@ -105,21 +105,21 @@ export default function WebGLBackground() {
     );
     geometry.rotateX(-Math.PI / 2.2);
 
-    // Polished chrome/metal material with purple tint
+    // LIQUID MERCURY MATERIAL
     const material = new THREE.MeshPhysicalMaterial({
-      color: 0x1a0a2e,
-      metalness: 1.0,
-      roughness: 0.05,
+      color: 0xe0e0e0, // Light silver base color
+      metalness: 1.0, // Absolute metal
+      roughness: 0.0, // Perfectly smooth
       clearcoat: 1.0,
-      clearcoatRoughness: 0.03,
+      clearcoatRoughness: 0.0,
       reflectivity: 1.0,
       envMap: cubeRenderTarget.texture,
-      envMapIntensity: 2.0,
+      envMapIntensity: 2.5, // Strong reflections
       side: THREE.DoubleSide,
     });
 
     const ribbon = new THREE.Mesh(geometry, material);
-    ribbon.position.y = -1;
+    ribbon.position.y = -1.5;
     ribbon.position.z = -2;
     scene.add(ribbon);
 
@@ -137,64 +137,68 @@ export default function WebGLBackground() {
     // === Scroll velocity tracking ===
     let scrollY = 0;
     let lastScrollY = 0;
-    let scrollVelocity = 0;
-    let smoothVelocity = 0; // lerped for smooth transitions
+    let smoothVelocity = 0; 
+    let baseTime = 0;
 
     const handleScroll = () => {
       scrollY = window.scrollY;
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     let animationId: number;
 
     function animate() {
       animationId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime() * 0.35;
+      
       const delta = clock.getDelta();
+      // Use delta-time accumulation for smoother, frame-rate independent wave motion
+      baseTime += delta * 0.45; 
 
-      // Compute scroll velocity (px per frame → normalized)
-      scrollVelocity = Math.abs(scrollY - lastScrollY);
+      // Compute simple scroll velocity
+      const scrollVelocity = Math.abs(scrollY - lastScrollY);
       lastScrollY = scrollY;
-      // Smooth lerp to avoid jarring jumps
-      smoothVelocity += (scrollVelocity - smoothVelocity) * 0.08;
+      
+      // Extremely smooth lerp (5%) for buttery transition between fast/slow speeds
+      smoothVelocity += (scrollVelocity - smoothVelocity) * 0.05;
 
-      // Amplitude multiplier: base 1.0, scales up to ~3.0 on fast scroll
-      const amplitudeMultiplier = 1.0 + Math.min(smoothVelocity * 0.08, 2.0);
+      // Amplitude multiplier: base 1.0, scales up to ~2.5 organically
+      const amplitudeMultiplier = 1.0 + Math.min(smoothVelocity * 0.04, 1.5);
 
-      // Flowing silk wave deformation with scroll-reactive amplitude
+      // Flowing liquid mercury deformation
       for (let i = 0; i < posAttr.count; i++) {
         const orig = originalPositions[i];
 
-        // Primary sine wave — big gentle undulation
-        const wave1 = Math.sin(orig.x * 0.15 + time * 1.2) * 2.0;
-        // Cross wave — adds organic twist
-        const wave2 = Math.cos(orig.z * 0.4 + time * 0.7) * 1.2;
-        // Fine detail ripple
-        const wave3 =
-          Math.sin((orig.x + orig.z) * 0.3 - time * 1.5) * 0.6;
-        // Subtle high-freq shimmer for silk/metal effect
+        // Deep fluid waves
+        const wave1 = Math.sin(orig.x * 0.12 + baseTime * 1.5) * 1.8;
+        const wave2 = Math.cos(orig.z * 0.25 + baseTime * 0.9) * 1.4;
+        
+        // Fluid displacement interactions
+        const wave3 = Math.sin((orig.x + orig.z) * 0.2 - baseTime * 1.2) * 0.8;
+        
+        // Liquid surface tension micro-details
         const shimmer =
-          Math.sin(orig.x * 0.8 + time * 3.0) *
-          Math.cos(orig.z * 0.6 + time * 2.0) *
-          0.15;
+          Math.sin(orig.x * 0.6 + baseTime * 2.5) *
+          Math.cos(orig.z * 0.5 + baseTime * 1.8) *
+          0.2;
 
         const totalWave = (wave1 + wave2 + wave3 + shimmer) * amplitudeMultiplier;
         posAttr.setY(i, orig.y + totalWave);
       }
+      
       posAttr.needsUpdate = true;
       geometry.computeVertexNormals();
 
-      // Parallax camera movement on scroll
-      camera.position.y = 6 - scrollY * 0.003;
-      camera.position.z = 18 - scrollY * 0.002;
-      camera.lookAt(0, -scrollY * 0.001, 0);
+      // Gentle Parallax
+      camera.position.y = 6 - scrollY * 0.002;
+      camera.position.z = 18 - scrollY * 0.0015;
+      camera.lookAt(0, -scrollY * 0.0005, 0);
 
-      // Rotating lights for shifting specular highlights across the chrome
-      keyLight.position.x = Math.sin(time * 0.4) * 12;
-      keyLight.position.z = Math.cos(time * 0.4) * 12;
+      // Slower light rotation to catch the liquid reflections beautifully
+      keyLight.position.x = Math.sin(baseTime * 0.5) * 15;
+      keyLight.position.z = Math.cos(baseTime * 0.5) * 15;
 
-      rimLight.position.x = Math.cos(time * 0.3) * -10;
-      rimLight.position.z = Math.sin(time * 0.3) * 8;
+      rimLight.position.x = Math.cos(baseTime * 0.4) * -12;
+      rimLight.position.z = Math.sin(baseTime * 0.4) * 10;
 
       renderer.render(scene, camera);
     }
