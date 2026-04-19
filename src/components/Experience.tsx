@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import BorderGlow from "./BorderGlow";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,18 +32,6 @@ export default function Experience() {
     });
   }, []);
 
-  const borderGlowProps = {
-    edgeSensitivity: 30,
-    backgroundColor: "rgba(255, 255, 255, 0.4)",
-    glowColor: "25 90 60", // Orange-ish hue
-    borderRadius: 24,
-    glowRadius: 30,
-    glowIntensity: 0.6,
-    coneSpread: 25,
-    animated: false,
-    colors: ['#0ea5e9', '#fb923c', '#a855f7'], // Light blue pool theme with orange and purple
-    fillOpacity: 0.35,
-  };
 
   return (
     <section ref={containerRef} id="experience" className="section-padding">
@@ -54,7 +41,7 @@ export default function Experience() {
 
       <div className="flex flex-col gap-8">
         {/* Amazon */}
-        <BorderGlow {...borderGlowProps}>
+        <div className="project-card rounded-[24px] relative overflow-hidden glass-strong">
           <div className="p-8 md:p-12 flex flex-col md:flex-row justify-between gap-8 group backdrop-blur-md">
             <div className="w-full md:w-1/3 scrub-reveal">
               <h2 className="text-3xl font-light mb-2 font-[family-name:var(--font-display)] italic text-slate-900">
@@ -74,10 +61,10 @@ export default function Experience() {
               </ul>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* SatSure */}
-        <BorderGlow {...borderGlowProps}>
+        <div className="project-card rounded-[24px] relative overflow-hidden glass-strong">
           <div className="p-8 md:p-12 flex flex-col md:flex-row justify-between gap-8 group backdrop-blur-md">
             <div className="w-full md:w-1/3 scrub-reveal">
               <h2 className="text-3xl font-light mb-2 font-[family-name:var(--font-display)] italic text-slate-900">
@@ -99,10 +86,10 @@ export default function Experience() {
               </ul>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* Outlier */}
-        <BorderGlow {...borderGlowProps}>
+        <div className="project-card rounded-[24px] relative overflow-hidden glass-strong">
           <div className="p-8 md:p-12 flex flex-col md:flex-row justify-between gap-8 group backdrop-blur-md">
             <div className="w-full md:w-1/3 scrub-reveal">
               <h2 className="text-3xl font-light mb-2 font-[family-name:var(--font-display)] italic text-slate-900">
@@ -123,10 +110,10 @@ export default function Experience() {
               </ul>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* The Turing Circle */}
-        <BorderGlow {...borderGlowProps}>
+        <div className="project-card rounded-[24px] relative overflow-hidden glass-strong">
           <div className="p-8 md:p-12 flex flex-col md:flex-row justify-between gap-8 group backdrop-blur-md">
             <div className="w-full md:w-1/3 scrub-reveal">
               <h2 className="text-3xl font-light mb-2 font-[family-name:var(--font-display)] italic text-slate-900">
@@ -148,7 +135,7 @@ export default function Experience() {
               </ul>
             </div>
           </div>
-        </BorderGlow>
+        </div>
       </div>
     </section>
   );

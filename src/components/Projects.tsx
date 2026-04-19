@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight, Lock } from "lucide-react";
-import BorderGlow from "./BorderGlow";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,18 +33,6 @@ export default function Projects() {
     });
   }, []);
 
-  const borderGlowProps = {
-    edgeSensitivity: 30,
-    backgroundColor: "rgba(255, 255, 255, 0.4)",
-    glowColor: "25 90 60", // Orange-ish Hue
-    borderRadius: 16,
-    glowRadius: 25,
-    glowIntensity: 0.6,
-    coneSpread: 25,
-    animated: false,
-    colors: ['#0ea5e9', '#fb923c', '#a855f7'], // Pool blue, orange, purple
-    fillOpacity: 0.35,
-  };
 
   return (
     <section
@@ -59,7 +46,7 @@ export default function Projects() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
         {/* BazaarBATNA */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex items-center justify-center overflow-hidden group rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               {/* Graphic specifically for the marketplace/negotiation concept */}
@@ -93,10 +80,10 @@ export default function Projects() {
               </a>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* Stratify */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex items-center justify-center overflow-hidden group rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               <div className="w-1/2 h-px bg-slate-300 group-hover:w-full group-hover:bg-[var(--accent)] transition-all duration-1000 ease-in-out"></div>
@@ -123,10 +110,10 @@ export default function Projects() {
               </a>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* AIL */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex items-center justify-center overflow-hidden group rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               <div className="absolute w-12 h-12 border border-slate-300 rounded-full group-hover:scale-[3] group-hover:border-[var(--accent)] transition-all duration-1000 ease-out opacity-50"></div>
@@ -159,10 +146,10 @@ export default function Projects() {
               </a>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* IITKPG_BrainGAT */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex items-center justify-center overflow-hidden group rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               <div className="absolute w-20 h-20 border-2 border-slated-200 rounded-full opacity-30"></div>
@@ -187,10 +174,10 @@ export default function Projects() {
               </a>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* Backtester + RL */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex flex-col items-center justify-center overflow-hidden group gap-2 rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               <div className="w-1/3 h-px bg-slate-300 group-hover:w-2/3 group-hover:bg-[var(--accent)] transition-all duration-700"></div>
@@ -218,10 +205,10 @@ export default function Projects() {
               </a>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* Deep Audio Denoising */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex items-center justify-center overflow-hidden group gap-1 rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               <div className="w-1 h-4 bg-slate-300 group-hover:h-16 group-hover:bg-[var(--accent-deep)] transition-all duration-300"></div>
@@ -250,10 +237,10 @@ export default function Projects() {
               </a>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* Time-Series Forecasting */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex items-end justify-center overflow-hidden group gap-2 pb-16 rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               <div className="w-2 h-4 bg-slate-300 group-hover:h-8 group-hover:bg-[var(--accent-deep)] transition-all duration-300"></div>
@@ -282,10 +269,10 @@ export default function Projects() {
               </a>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* SkyePlay */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex items-center justify-center overflow-hidden group rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               <div className="w-16 h-10 border border-slate-300 rounded-md flex items-center justify-center group-hover:border-[var(--accent)] transition-colors">
@@ -312,10 +299,10 @@ export default function Projects() {
               </a>
             </div>
           </div>
-        </BorderGlow>
+        </div>
 
         {/* PhotoOrbit */}
-        <BorderGlow {...borderGlowProps} className="scrub-reveal h-full">
+        <div className="project-card scrub-reveal h-full rounded-2xl relative overflow-hidden glass-strong">
           <div className="p-6 h-full flex flex-col backdrop-blur-md">
             <div className="aspect-[4/3] bg-[var(--bg-card)] border border-[var(--border)] mb-8 relative flex items-center justify-center overflow-hidden group rounded-xl hover:border-[var(--accent)] transition-colors duration-500">
               <div className="w-20 h-20 border border-slate-400 rotate-45 group-hover:rotate-90 group-hover:border-[var(--accent)] transition-all duration-1000 absolute"></div>
@@ -337,7 +324,7 @@ export default function Projects() {
               </div>
             </div>
           </div>
-        </BorderGlow>
+        </div>
       </div>
     </section>
   );
