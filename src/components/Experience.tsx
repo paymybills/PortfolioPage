@@ -38,6 +38,31 @@ export default function Experience() {
         02 / RESEARCH & EXPERIENCE
       </div>
 
+      {/* Amazon */}
+      <div className="border-t-subtle py-12 flex flex-col md:flex-row justify-between gap-8 group">
+        <div className="w-full md:w-1/3 scrub-reveal">
+          <h2 className="text-3xl font-light mb-2 font-[family-name:var(--font-display)] italic">
+            Software Dev Engineer Intern
+          </h2>
+          <p className="text-label text-zinc-500">
+            AMAZON · UPCOMING SUMMER 2026
+          </p>
+        </div>
+        <div className="w-full md:w-1/2 scrub-reveal">
+          <p className="text-zinc-400 text-lg font-light leading-relaxed mb-4 group-hover:text-[var(--accent-light)] transition-colors duration-500">
+            Incoming software engineering intern preparing to build high-performance distributed systems at global scale.
+          </p>
+          <ul className="text-zinc-500 text-sm space-y-2 font-light">
+            <li>
+              — Focus on highly scalable, fault-tolerant cloud computing architectures.
+            </li>
+            <li>
+              — Applying robust object-oriented patterns to massive-domain problems.
+            </li>
+          </ul>
+        </div>
+      </div>
+
       {/* SatSure */}
       <div className="border-t-subtle py-12 flex flex-col md:flex-row justify-between gap-8 group">
         <div className="w-full md:w-1/3 scrub-reveal">
@@ -62,35 +87,6 @@ export default function Experience() {
             <li>
               — Contributing to a geospatial foundation model tailored to Indian
               land-use patterns.
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      {/* IIT Kharagpur */}
-      <div className="border-t-subtle py-12 flex flex-col md:flex-row justify-between gap-8 group">
-        <div className="w-full md:w-1/3 scrub-reveal">
-          <h2 className="text-3xl font-light mb-2 font-[family-name:var(--font-display)] italic">
-            Neuroimaging ML Intern
-          </h2>
-          <p className="text-label text-zinc-500">
-            IIT KHARAGPUR · JUN 2025 — PRESENT
-          </p>
-        </div>
-        <div className="w-full md:w-1/2 scrub-reveal">
-          <p className="text-zinc-400 text-lg font-light leading-relaxed mb-4 group-hover:text-[var(--accent-light)] transition-colors duration-500">
-            Developing spatiotemporal sequence models for fMRI data using
-            Mamba-style architectures, targeting clinically relevant prediction
-            tasks.
-          </p>
-          <ul className="text-zinc-500 text-sm space-y-2 font-light">
-            <li>
-              — Built robust preprocessing pipelines to transform raw signals
-              into structured connectivity graphs.
-            </li>
-            <li>
-              — Open-sourced BrainGAT; benchmarking GNN baselines against state
-              space models.
             </li>
           </ul>
         </div>
