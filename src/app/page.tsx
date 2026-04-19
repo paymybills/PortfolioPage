@@ -1,4 +1,4 @@
-import WebGLBackground from "@/components/WebGLBackground";
+import Iridescence from "@/components/Iridescence";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Experience from "@/components/Experience";
@@ -9,8 +9,15 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      {/* Flowing Purple Wave Background */}
-      <WebGLBackground />
+      {/* Iridescent Shader Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <Iridescence
+          color={[0.5, 0.7, 1.0]} // Soft cyan-purple mix based on the ref
+          mouseReact={false}
+          amplitude={0.1}
+          speed={1.0}
+        />
+      </div>
 
       {/* Glassmorphic Navigation */}
       <Navigation />
