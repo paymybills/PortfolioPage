@@ -30,8 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased text-white`}
-        style={{ backgroundColor: "#050505" }}
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
       >
         <LenisProvider>{children}</LenisProvider>
       </body>
