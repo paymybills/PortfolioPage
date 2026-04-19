@@ -1,4 +1,4 @@
-import Aurora from "@/components/Aurora";
+
 import LiquidEther from "@/components/LiquidEther";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
@@ -29,14 +29,7 @@ export default function Home() {
           autoRampDuration={0.6}
         />
       </div>
-      <div className="fixed inset-0 z-0 pointer-events-none mix-blend-screen opacity-75">
-        <Aurora
-          colorStops={["#7cff67","#B497CF","#5227FF"]}
-          blend={0.5}
-          amplitude={1.0}
-          speed={0.5}
-        />
-      </div>
+
 
       {/* Glassmorphic Navigation */}
       <Navigation />
