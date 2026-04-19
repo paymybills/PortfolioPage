@@ -1,4 +1,5 @@
-import Iridescence from "@/components/Iridescence";
+import Aurora from "@/components/Aurora";
+import LiquidEther from "@/components/LiquidEther";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Experience from "@/components/Experience";
@@ -9,13 +10,31 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      {/* Iridescent Shader Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <Iridescence
-          color={[0.5, 0.7, 1.0]} // Soft cyan-purple mix based on the ref
-          mouseReact={false}
-          amplitude={0.1}
-          speed={1.0}
+        <LiquidEther
+          colors={['#5227FF', '#FF9FFC', '#B497CF']}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous={false}
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.5}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+        />
+      </div>
+      <div className="fixed inset-0 z-0 pointer-events-none mix-blend-screen opacity-75">
+        <Aurora
+          colorStops={["#7cff67","#B497CF","#5227FF"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
         />
       </div>
 
