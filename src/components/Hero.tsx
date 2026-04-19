@@ -50,12 +50,9 @@ export default function Hero() {
       </div>
 
       <h1 className="title-huge leading-tight">
-        <span className="reveal-mask block pb-4">
-          <span className="reveal-text hero-text">Research and</span>
-        </span>
-        <span className="reveal-mask block pb-6">
+        <span className="reveal-mask block pb-6 pr-8">
           <span className="reveal-text hero-text text-[var(--text-main)] italic relative">
-            Infra.
+            AI and Infra.
             <span className="absolute -inset-4 rounded-full bg-[var(--accent-glow)] blur-[60px] -z-10 mix-blend-screen opacity-70 block" />
           </span>
         </span>
